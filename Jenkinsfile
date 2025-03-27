@@ -4,7 +4,7 @@ pipeline {
 		stage("verifying tooling") {
 			steps {
 				sh '''
-					docker version
+					docker --version
 					docker info
 					docker compose version
 					curl --version
