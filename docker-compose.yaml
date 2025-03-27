@@ -1,0 +1,25 @@
+version: "3.8"
+
+services:
+  docker:
+    build: ./
+    platform: linux/arm64
+    ports:
+      - "80:80"
+    volumes:
+      - ./:/usr/share/nginx/html
+
+  db:
+    ports:
+      - "5432:5432"
+    image: arm64v8/postgres:latest # Use the ARM64-compatible PostgreSQL image
+    platform: linux/arm64 # Explicitly specify ARM64 architecture
+    environment:
+      - POSTGRES_PASSWORD=mywebapp
+      - POSTGRES_DB=mydb
+      - POSTGRES_USER=myuser
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+volumes:
+  db_data:
